@@ -18,17 +18,35 @@ int main() {
         scanf("%d", &set2[i]);
     }
 
-    /* YOUR CODE GOES HERE!
-         Hints:
-         1. You need to find numbers that are in BOTH set1 and set2.
-         2. BUT, only include each common number ONCE in your result.
-         3. Store the common numbers in the 'intersection' array.
-    */
-    //----------------------------------------------------------------//
-    {
-
+    for(int i=0;i<n1;i++){
+        for(int j=0;j<n2;j++){
+            if(set1[i]==set2[j]){
+                int already = 0;
+                for(int m = 0; m < count; m++) {
+                    if(intersection[m] == set1[i]) {
+                        already = 1;
+                        break;
+                    }
+                }
+                if(!already) {
+                    intersection[count++] = set1[i];
+                }
+                break;
+            }
+        }
     }
-    //----------------------------------------------------------------//
+    
+    int temp;
+    for (i = 0; i < count - 1; i++) {
+        for (j = 0; j < count - i - 1; j++) {
+            if (intersection[j] > intersection[j + 1]) {
+                temp = intersection[j];
+                intersection[j] = intersection[j + 1];
+                intersection[j + 1] = temp;
+            }
+        }
+    }
+    
     for(i = 0; i < count; i++) {
         printf("%d ", intersection[i]);
     }
